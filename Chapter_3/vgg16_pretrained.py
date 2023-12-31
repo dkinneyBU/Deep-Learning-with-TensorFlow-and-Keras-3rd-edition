@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 
 # prebuild model with pre-trained weights on imagenet
-model = VGG16(weights='imagenet', include_top=True)
+model = VGG16(weights='vgg16_weights.h5', include_top=True)
 model.compile(optimizer='sgd', loss='categorical_crossentropy')
 
 # resize into VGG16 trained images' format
@@ -18,5 +18,5 @@ out = model.predict(im)
 index = np.argmax(out)
 print(index)
 
-#plt.plot(out.ravel())
-#plt.show()
+plt.plot(out.ravel())
+plt.show()

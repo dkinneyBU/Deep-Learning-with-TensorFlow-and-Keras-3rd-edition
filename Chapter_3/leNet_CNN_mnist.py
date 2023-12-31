@@ -1,8 +1,9 @@
+# %%
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models, optimizers
 
 
-#define the convnet 
+#%% define the convnet 
 class LeNet:
 	@staticmethod
 	def build(input_shape, classes):
@@ -22,9 +23,8 @@ class LeNet:
 		return model
 
 
-
-# network and training
-EPOCHS = 5
+# %% network and training
+EPOCHS = 20
 BATCH_SIZE = 128
 VERBOSE = 1
 OPTIMIZER = tf.keras.optimizers.Adam()
@@ -34,7 +34,7 @@ IMG_ROWS, IMG_COLS = 28, 28 # input image dimensions
 INPUT_SHAPE = (IMG_ROWS, IMG_COLS, 1)
 NB_CLASSES = 10  # number of outputs = number of digits
 
-# data: shuffled and split between train and test sets
+# %% data: shuffled and split between train and test sets
 (X_train, y_train), (X_test, y_test) = datasets.mnist.load_data()
 
 # reshape
@@ -51,7 +51,7 @@ X_test = X_test.astype('float32')
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
-# convert class vectors to binary class matrices
+# %% convert class vectors to binary class matrices
 y_train = tf.keras.utils.to_categorical(y_train, NB_CLASSES)
 y_test = tf.keras.utils.to_categorical(y_test, NB_CLASSES)
 
@@ -61,13 +61,13 @@ model.compile(loss="categorical_crossentropy", optimizer=OPTIMIZER,
 	metrics=["accuracy"])
 model.summary()
 
-# use TensorBoard, princess Aurora!
+# %% use TensorBoard, princess Aurora!
 callbacks = [
   # Write TensorBoard logs to `./logs` directory
   tf.keras.callbacks.TensorBoard(log_dir='./logs')
 ]
 
-# fit 
+# %% import fit 
 history = model.fit(X_train, y_train, 
 		batch_size=BATCH_SIZE, epochs=EPOCHS, 
 		verbose=VERBOSE, validation_split=VALIDATION_SPLIT,
@@ -78,3 +78,8 @@ print("\nTest score:", score[0])
 print('Test accuracy:', score[1])
 
 
+
+# %%
+#reload_ext tensorboard
+!tensorboard --logdir "./logs"
+# %%
