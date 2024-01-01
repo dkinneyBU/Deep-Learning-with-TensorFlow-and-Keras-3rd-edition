@@ -14,7 +14,7 @@ model = KeyedVectors.load("data/text8-word2vec.bin")
 word_vectors = model.wv
 
 # get words in the vocabulary
-words = word_vectors.vocab.keys()
+words = word_vectors.key_to_index.keys()
 print([x for i, x in enumerate(words) if i < 10])
 assert("king" in words)
 
@@ -59,5 +59,5 @@ print("distance(singapore, malaysia) = {:.3f}".format(
 vec_song = word_vectors["song"]
 print("\n# output vector obtained directly, shape:", vec_song.shape)
 
-vec_song_2 = word_vectors.word_vec("song", use_norm=True)
+vec_song_2 = word_vectors.get_vector("song")
 print("# output vector obtained using word_vec, shape:", vec_song_2.shape)

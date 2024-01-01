@@ -7,4 +7,4 @@ assert(len(info) > 0)
 dataset = api.load("text8")
 model = Word2Vec(dataset)
 
-model.save("data/text8-word2vec.bin")
+model.save("./data/text8-word2vec.bin")
